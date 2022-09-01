@@ -1,4 +1,4 @@
-# Misc scripts for Selection Scan project
+# Example scripts for Object Detection-based selection scans using images of ancestry patterns project
 
 ## Notes for generalizable SLiM simulations:
 
