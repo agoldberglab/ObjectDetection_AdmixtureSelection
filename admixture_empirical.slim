@@ -1,0 +1,119 @@
+//s; L; t_end; N; mig; out1; seed
+
+initialize() {
+	initializeTreeSeq();
+	initializeMutationRate(0);
+	//mean and alpha shape parameters of gamma distributed fitness effects
+	initializeMutationType("m1", 0.5, "f", runif(1,0,0.5));
+	initializeGenomicElementType("g1", m1, 1.0);
+	initializeGenomicElement(g1, 0, L); //chromosome size
+	//mean recombination rate is same for humans and Anopheles
+	initializeRecombinationRate(5.11e-9);
+}
+
+//specify what generation to end the simulation
+1 {
+	gen_end = asInteger(t_end); //total number of generations
+	//reschedule final block to occur at specified generation
+	sim.rescheduleScriptBlock(s1, 1*gen_end, 1*gen_end); 
+}
+
+1 late() {
+	sim.addSubpop("p1", 1);
+	sim.addSubpop("p2", 1);
+	//UNCOMMENT FOR THREE POPULATION ADMIXTURE
+	//sim.addSubpop("p3", 1);
+
+	sim.treeSeqRememberIndividuals(sim.subpopulations.individuals);
+	
+	//UNCOMMENT FOR TWO VARIANTS
+	//half = asInteger(((L-1)/2));
+	//p1_locus = sample(0:half, 1);
+	//p1.genomes.addNewDrawnMutation(m1, p1_locus);
+	//p1_locus = sample(half:(L-1), 1);
+	//p1.genomes.addNewDrawnMutation(m1, p1_locus);
+	//p1_pos = p1.genomes[0].positionsOfMutationsOfType(m1);
+	//p1_s = p1.genomes[0].mutationsOfType(m1).selectionCoeff;
+	
+	//COMMENT FOR TWO VARIANTS
+	p1_locus = sample(0:(L-1), 1);
+	p1.genomes.addNewDrawnMutation(m1, p1_locus);
+	p1_pos = p1.genomes[0].positionsOfMutationsOfType(m1);
+	p1_s = p1.genomes[0].mutationsOfType(m1).selectionCoeff;
+	outstring = "_s-" + asString(p1_s) + "_pos-" + asString(p1_pos) + "_";
+	defineConstant("s_pos", outstring);
+	
+	//write position and s to file
+	lines=NULL;
+	for (i in 0:(length(p1_s)-1)) {
+		mutLine = paste(c(p1_pos[i], "\t", p1_s[i], "\n"), "");
+		lines= c(lines, mutLine);
+	}
+	file = paste(lines, "");
+	file="p1_pos\tp1_s\n" + file;
+	
+	outname = "" + out + "_" + seed + "_variants.txt";
+	
+	if (!writeFile(outname, file))
+		stop("Error writing file.");
+	
+	
+	//UNCOMMENT FOR THREE POPULATION ADMIXTURE
+	//sim.addSubpop("p3", N);
+	//m1 = asFloat(mig_p1);
+	//m2 = asFloat(mig_p2);
+	//p4.setMigrationRates(c(p1, p2, p3), c(m1, m2, 1-(m1+m2)));
+
+	//COMMENT FOR THREE POPULATION ADMIXTURE
+	sim.addSubpop("p3", N); 
+	m = asFloat(mig);
+	p3.setMigrationRates(c(p1, p2), c(m, 1-m));
+
+}
+
+//COMMENT TO INCLUDE CONTINUOUS ADMIXTURE
+//2 late() {
+//	p3.setMigrationRates(c(p1, p2), c(0.0, 0.0));
+//	p1.setSubpopulationSize(0);
+//	p2.setSubpopulationSize(0);
+//}
+
+//UNCOMMENT TO INCLUDE EXPONENTIAL GROWTH
+//can also modify this code to do instantaneous size changes at specific generations
+//2:10000 {
+//	base = asFloat("" + "1." + rate); //user must specify rate
+//	newSize = asInteger(round(base^(sim.generation-1) * N));
+//	p3.setSubpopulationSize(newSize);
+//}
+
+//UNCOMMENT TO INCLUDE CONTINUOUS ADMIXTURE
+//if user specifies cont_adm="T", add migrants from source populations each generation
+//migrants will be added at a rate of 20% new migrants per generation, at the same
+//proportions as the original ancestry contributions specified above
+//will need to modify for three-way admixture
+2 late() {
+	if (cont_adm) {
+		m = asFloat(mig);
+		mig_rate = 0.2 * m;
+		mig_rate2 = 0.2-mig_rate;
+		p3.setMigrationRates(c(p1,p2), c(mig_rate, mig_rate2));
+	} else {
+		p3.setMigrationRates(c(p1, p2), c(0.0, 0.0));
+		p1.setSubpopulationSize(0);
+		p2.setSubpopulationSize(0);
+}
+}
+
+
+//end simulation at generation t_end
+//output trees file for tracking local ancestry
+s1 10000 late() {
+	if (cont_adm) {
+		p1.setSubpopulationSize(0);
+		p2.setSubpopulationSize(0);
+	}
+	
+	outtrees = "" + out + s_pos + seed + ".trees"; //remove s_pos if two+ variants
+	sim.treeSeqOutput(outtrees);
+	sim.simulationFinished();
+}
