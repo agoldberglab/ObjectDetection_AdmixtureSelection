@@ -55,7 +55,7 @@ Simulation script will output two files
 1. a `.trees` file with the name `{out}_s-{selectioncoeff}_pos-{physicalposition}_seed-{seednum}.trees`. This file will be used to generate ancestry images.
 2. a `variants.txt` file with the name `{out}_seed-{seednum}_variants.txt`. This file contains the physical position and selection strength of each variant in the simulation. The single variant simulations have this information in the filenames, but having this information separate may be helpful for keeping track of the range of selection strengths and physical positions. It is also useful for simulations with two or more selected mutations.
 
-In the simulation script, there are some lines that can be uncommented to include population size changes, three-way admixture, two selected mutations, continuous migration each generation. I haven't tested these completely, so let me know if there are bugs when incorporating those options.
+In the simulation script, there are some lines that can be uncommented to include population size changes, three-way admixture, two selected mutations, continuous migration each generation. I haven't tested these completely, so there may be bugs.
 
 B. [run_admixture.sh](./run_admixture.sh) - example job array script to generate 1000 SLiM simulations with the [admixture.slim](./admixture.slim) file.
 
@@ -63,12 +63,19 @@ C. [localancestry_alltracts.py](./localancestry_alltracts.py) - script to create
 
 D. [admixture_ancestrytracts_jobarray.sh](./admixture_ancestrytracts_jobarray.sh) - example job array to generate bed-like ancestry tract files for 1000 SLiM simulations with the [localancestry_alltracts.py](./localancestry_alltracts.py) script.
 
-E. [admixture_makeimage.R](./admixture_makeimage.R) - script to generate b&w ancestry images. Assumes two-way admixture. Height is hard-coded to 200 pixels (i.e. assumes 200 sampled individuals). Chromosome length and image width must be specified at command line. e.g. `admixture_makeimage.R filename_alltracts.txt 50000000 400` would create a 200x400 image, assuming a chromosome length of 50 Mb.
+E. [admixture_makeimage.R](./admixture_makeimage.R) - script to generate b&w ancestry images. Assumes two-way admixture. Height is hard-coded to 200 pixels. Chromosome length and image width must be specified at command line. e.g. `admixture_makeimage.R filename_alltracts.txt 50000000 400` would create a 200x400 image, assuming a chromosome length of 50 Mb.
 
 F. [admixture_makeimages_jobarray.sh](./admixture_makeimages_jobarray.sh) - example job array to generate images for 1000 simulations with [admixture_makeimage.R](./admixture_makeimage.R) script
+
+
+## Training & Inference w/ [IceVision v0.5.2](https://airctic.com/0.5.2/)
+
+Example code and notes can be found in [objectdetection_ancestryimages_example.ipynb](./objectdetection_ancestryimages_example.ipynb)
 
 
 Misc example scripts:
 
 * alternate admixture SLiMulation files:
-  * [admixture.slim](./admixture.slim)
+  * [admixture_popsize.slim](./admixture_popsize.slim) - similar to above, but includes block for bottleneck at 25-35 generations
+  * [admixture_Fst.slim](./admixture_Fst.slim) - similar to above, but draws beneficial mutation from both populations
+  * [admixture_whole-genome.slim](./admixture_whole-genome.slim) - similar to above, but for "whole genome" (multiple chromosomes)
