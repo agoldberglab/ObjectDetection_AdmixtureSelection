@@ -77,11 +77,11 @@ Misc scripts:
 
 ## Training & Inference w/ [IceVision v0.5.2](https://airctic.com/0.5.2/)
 
-Example code and notes can be found in [objectdetection_ancestryimages_example.ipynb](./objectdetection_ancestryimages_example.ipynb)
+Example code and notes for training and inference can be found in [objectdetection_ancestryimages_example.ipynb](./objectdetection_ancestryimages_example.ipynb)
 
 * [inference.py](./inference.py) - skip training & get precision & recall values across varying threshholds for a set of images, using a pre-trained model
 
-### Notes for running in SLURM environment
+#### Notes for running in SLURM environment
 
 In order to run on the Duke Compute Cluster (slurm), we built a Singularity container image (see e.g. [Singularity.def](./Singularity.def)), which can be pulled down by running:
 
