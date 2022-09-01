@@ -81,3 +81,12 @@ Example code and notes can be found in [objectdetection_ancestryimages_example.i
 
 * [inference.py](./inference.py) - skip training & get precision & recall values across varying threshholds for a set of images, using a pre-trained model
 
+### Notes for running in SLURM environment
+
+In order to run on the Duke Compute Cluster (slurm), we built a Singularity container image (see e.g. [Singularity.def](./Singularity.def)), which can be pulled down by running:
+
+```curl -k -O https://research-singularity-registry.oit.duke.edu/goldberglab/selectionscansingularity.sif```
+
+Then you can run scripts on the cluster, for example:
+
+```singularity exec --nv -B /work selectionscansingularity.sif inference.py simulation_scripts_directory analysis_sub_directory```
