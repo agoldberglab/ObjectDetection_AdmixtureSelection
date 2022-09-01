@@ -67,15 +67,17 @@ E. [admixture_makeimage.R](./admixture_makeimage.R) - script to generate b&w anc
 
 F. [admixture_makeimages_jobarray.sh](./admixture_makeimages_jobarray.sh) - example job array to generate images for 1000 simulations with [admixture_makeimage.R](./admixture_makeimage.R) script
 
-
-## Training & Inference w/ [IceVision v0.5.2](https://airctic.com/0.5.2/)
-
-Example code and notes can be found in [objectdetection_ancestryimages_example.ipynb](./objectdetection_ancestryimages_example.ipynb)
-
-
-Misc example scripts:
+Misc scripts:
 
 * alternate admixture SLiMulation files:
   * [admixture_popsize.slim](./admixture_popsize.slim) - similar to above, but includes block for bottleneck at 25-35 generations
   * [admixture_Fst.slim](./admixture_Fst.slim) - similar to above, but draws beneficial mutation from both populations
   * [admixture_whole-genome.slim](./admixture_whole-genome.slim) - similar to above, but for "whole genome" (multiple chromosomes)
+
+
+## Training & Inference w/ [IceVision v0.5.2](https://airctic.com/0.5.2/)
+
+Example code and notes can be found in [objectdetection_ancestryimages_example.ipynb](./objectdetection_ancestryimages_example.ipynb)
+
+* [inference.py](./inference.py) - skip training & get precision & recall values across varying threshholds for a set of images, using a pre-trained model
+
