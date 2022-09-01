@@ -1,4 +1,4 @@
-# Example scripts for Object Detection-based selection scans using images of ancestry patterns project
+# Example scripts for object detection-based selection scans using images of ancestry patterns
 
 ## Notes for generalizable SLiM simulations:
 
@@ -66,3 +66,9 @@ D. [admixture_ancestrytracts_jobarray.sh](./admixture_ancestrytracts_jobarray.sh
 E. [admixture_makeimage.R](./admixture_makeimage.R) - script to generate b&w ancestry images. Assumes two-way admixture. Height is hard-coded to 200 pixels (i.e. assumes 200 sampled individuals). Chromosome length and image width must be specified at command line. e.g. `admixture_makeimage.R filename_alltracts.txt 50000000 400` would create a 200x400 image, assuming a chromosome length of 50 Mb.
 
 F. [admixture_makeimages_jobarray.sh](./admixture_makeimages_jobarray.sh) - example job array to generate images for 1000 simulations with [admixture_makeimage.R](./admixture_makeimage.R) script
+
+
+Misc example scripts:
+
+* alternate admixture SLiMulation files:
+  * [admixture.slim](./admixture.slim)
