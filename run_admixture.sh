@@ -22,29 +22,10 @@ do
 -d out='"/work/ih49/simulations/model_misspecification/Fst_0/L-50_N-10000_single-pulse_Fst-0_m-0.5"' \
 -d seed=\'"seed-$i"\' ~/home/selectionscan_NN/simplified_scripts/admixture_Fst.slim
 
-#/hpc/home/ih49/home/SLiM_build/slim -d L=50000000 -d N=10000 \
-#-d mig=0.75 -d t_end=50 \
-#-d out='"/work/ih49/simulations/model_misspecification/admix_prop_75/L-50_N-10000_single-pulse_m-0.75"' \
-#-d seed=\'"seed-$i"\' ~/home/selectionscan_NN/simplified_scripts/admixture.slim
+/hpc/home/ih49/home/SLiM_build/slim -d L=50000000 -d N=10000 \
+-d mig=0.75 -d t_end=50 \
+-d out='"/work/ih49/simulations/model_misspecification/admix_prop_75/L-50_N-10000_single-pulse_m-0.75"' \
+-d seed=\'"seed-$i"\' ~/home/selectionscan_NN/simplified_scripts/admixture.slim
 
-#/hpc/home/ih49/home/SLiM_build/slim -d L=50000000 -d N=10000 \
-#-d mig=0.1 -d t_end=50 \
-#-d out='"/work/ih49/simulations/model_misspecification/admix_prop_1/L-50_N-10000_single-pulse_m-0.1"' \
-#-d seed=\'"seed-$i"\' ~/home/selectionscan_NN/simplified_scripts/admixture.slim
-
-#/hpc/home/ih49/home/SLiM_build/slim -d L=50000000 -d N=10000 \
-#-d mig=0.9 -d t_end=50 \
-#-d out='"/work/ih49/simulations/model_misspecification/admix_prop_9/L-50_N-10000_single-pulse_m-0.9"' \
-#-d seed=\'"seed-$i"\' ~/home/selectionscan_NN/simplified_scripts/admixture.slim
-
-#/hpc/home/ih49/home/SLiM_build/slim -d L=50000000 -d N=10000 \
-#-d mig=0.5 -d t_end=25 \
-#-d out='"/work/ih49/simulations/model_misspecification/admix_gen_25/L-50_N-10000_single-pulse_gen-25_m-0.5"' \
-#-d seed=\'"seed-$i"\' ~/home/selectionscan_NN/simplified_scripts/admixture.slim
-
-#/hpc/home/ih49/home/SLiM_build/slim -d L=50000000 -d N=10000 \
-#-d mig=0.5 -d t_end=100 \
-#-d out='"/work/ih49/simulations/model_misspecification/admix_gen_100/L-50_N-10000_single-pulse_gen-100_m-0.5"' \
-#-d seed=\'"seed-$i"\' ~/home/selectionscan_NN/simplified_scripts/admixture.slim
 done
 

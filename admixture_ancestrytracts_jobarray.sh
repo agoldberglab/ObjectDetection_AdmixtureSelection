@@ -18,10 +18,7 @@ done
 for i in "${c_array[@]}"
 do
 
-#filename=$(ls /work/ih49/simulations/AIMs/*_seed-${i}.trees | head -n 1)
-#~/home/selectionscan_NN/localancestry_alltracts.py $filename
-
-filename=$(ls /work/ih49/simulations/empirical/*_seed-${i}.trees | head -n 1)
-~/home/selectionscan_NN/simplified_scripts/localancestry_alltracts_EMPIRICAL.py $filename
+filename=$(ls /work/ih49/simulations/AIMs/*_seed-${i}.trees | head -n 1)
+~/home/selectionscan_NN/localancestry_alltracts.py $filename
 
 done
