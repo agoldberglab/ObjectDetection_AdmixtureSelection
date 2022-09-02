@@ -99,7 +99,7 @@ Example code and notes for training and inference can be found in [objectdetecti
 
 #### Notes for running in SLURM environment
 
-In order to run on the Duke Compute Cluster (slurm), we built a Singularity container image (see e.g. [Singularity.def](./Singularity.def)), which can be pulled down by running:
+In order to run IceVision on the Duke Compute Cluster (slurm), we built a Singularity container image (see e.g. [Singularity.def](./Singularity.def)), which can be pulled down by running:
 
 ```curl -k -O https://research-singularity-registry.oit.duke.edu/goldberglab/selectionscansingularity.sif```
 
