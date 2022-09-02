@@ -1,8 +1,23 @@
 # Example scripts for object detection-based selection scans using images of ancestry patterns
 
+## Software versions used in this project
+[SLiM](https://messerlab.org/slim/) - v3.4
+[R](https://cran.r-project.org/) - v4.0.0
+[Python](https://www.python.org/) - v3.7.4
+
+Python libraries:
+* [IceVision](https://airctic.com/0.5.2/) - v0.5.2
+* [tskit](https://tskit.dev/tskit/docs/stable/introduction.html) - v0.2.3 (included in [msprime](https://tskit.dev/msprime/docs/stable/intro.html) v0.7.4)
+* [pyslim](https://tskit.dev/pyslim/docs/latest/introduction.html) - v0.401
+
+R packages:
+* [tidyverse](https://www.tidyverse.org/) - v1.3.0
+* [magrittr](https://cran.r-project.org/web/packages/magrittr/vignettes/magrittr.html) - v2.0.1
+* [plyr](https://www.rdocumentation.org/packages/plyr/versions/1.8.6) - v1.8.6 
+
 ## Notes for generalizable SLiM simulations:
 
-A. [admixture.slim](./admixture.slim) - this is a programmable/general SLiM script for admixture simulations. As is, user must specify the following parameters from the command line:
+A. [admixture.slim](./admixture.slim) - this is a programmable/general SLiM script for admixture simulations. Selection strength is randomly drawn from a uniform distribution s~U(0, 0.5). As is, user must specify the following parameters from the command line:
 
 <table>
     <thead>
@@ -17,11 +32,6 @@ A. [admixture.slim](./admixture.slim) - this is a programmable/general SLiM scri
             <td rowspan=1 align="center">L</td>
             <td rowspan=1 align="center">chromosome length (bp)</td>
             <td rowspan=1 align="center">-d L=50000000</td>
-        </tr>
-        <tr>
-            <td rowspan=1 align="center">s</td>
-            <td rowspan=1 align="center">selection coefficient for fixed fitness effects</td>
-            <td rowspan=1 align="center">-d s=0.05</td>
         </tr>
         <tr>
             <td rowspan=1 align="center">mig</td>
@@ -63,7 +73,11 @@ C. [localancestry_alltracts.py](./localancestry_alltracts.py) - script to create
 
 D. [admixture_ancestrytracts_jobarray.sh](./admixture_ancestrytracts_jobarray.sh) - example job array to generate bed-like ancestry tract files for 1000 SLiM simulations with the [localancestry_alltracts.py](./localancestry_alltracts.py) script.
 
-E. [admixture_makeimage.R](./admixture_makeimage.R) - script to generate b&w ancestry images. Assumes two-way admixture. Height is hard-coded to 200 pixels. Chromosome length and image width must be specified at command line. e.g. `admixture_makeimage.R filename_alltracts.txt 50000000 400` would create a 200x400 image, assuming a chromosome length of 50 Mb.
+E. [admixture_makeimage.R](./admixture_makeimage.R) - script to generate b&w ancestry images. Assumes two-way admixture. Height is hard-coded to 200 pixels. Chromosome length and image width must be specified at command line. e.g. `admixture_makeimage.R filename_alltracts.txt 50000000 400` would create a 200x400 image, assuming a chromosome length of 50 Mb and `admixture_makeimage.R filename_alltracts.txt 295 200` would create a 200x200 image, assuming a chromosome with max genetic map length of 295 cM. Excpects bed-like file of ancestry tracts (exclusive. e.g. intervals are \[start, end)) with at least the following columns (any order, labeled):
+   * *start_bp* - first position of ancestry tract (0-based, can be physical or genetic map positions, correct corresponding chromosome length must be specified at command line)
+   * *end_bp* - last position of ancestry tract (exclusive)
+   * *ancID* - ancestry label for that tract (expects 0 or 1)
+   * *childID* - unique haplotype ID (e.g. for a diploid indiviudal "SUBJ-A" you would have tracts mapping to SUBJ-A_Hap1 and SUBJ-A_Hap2)
 
 F. [admixture_makeimages_jobarray.sh](./admixture_makeimages_jobarray.sh) - example job array to generate images for 1000 simulations with [admixture_makeimage.R](./admixture_makeimage.R) script
 
