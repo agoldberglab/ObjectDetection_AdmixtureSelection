@@ -103,6 +103,6 @@ In order to run IceVision on the Duke Compute Cluster (slurm), we built a Singul
 
 ```curl -k -O https://research-singularity-registry.oit.duke.edu/goldberglab/selectionscansingularity.sif```
 
-Then you can run scripts on the cluster, for example:
+Then you can run scripts on a worker node, for example:
 
 ```singularity exec --nv -B /work selectionscansingularity.sif inference.py simulation_scripts_directory analysis_sub_directory```
