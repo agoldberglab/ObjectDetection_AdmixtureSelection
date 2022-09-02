@@ -94,9 +94,9 @@ Misc scripts:
 
 ## Training & Inference w/ [IceVision v0.5.2](https://airctic.com/0.5.2/)
 
-Example code and notes for training and inference can be found in [objectdetection_ancestryimages_example.ipynb](./objectdetection_ancestryimages_example.ipynb)
+* Example code and notes for training and inference can be found in [objectdetection_ancestryimages_example.ipynb](./objectdetection_ancestryimages_example.ipynb)
 
-* [inference.py](./inference.py) - skip training & get precision & recall values across varying threshholds for a set of images, using a pre-trained model. Not tested outside our specific analyses and directory structure, some hard-coded values may need to be edited. Expects users to provide full paths for a base_directory which contained the images to infer from, an out_directory/filename to output the final table of P-R values for each threshhold, and the pretrained model.  e.g. ```inference.py /home/simulations/analysis1_images /home/simulations/PR-results/object_localization_analysis1_precision-recall.txt /home/models/trained_model.pth```
+* [inference.py](./inference.py) - skip training & output precision & recall values across varying threshholds for a set of images, using a pre-trained model. Not tested outside our specific analyses and directory structure, some hard-coded values may need to be edited. Expects users to provide full paths for a base_directory which contained the images to infer from, an out_directory/filename to output the final table of P-R values for each threshhold, and the pretrained model.  e.g. ```inference.py /home/simulations/analysis1_images /home/simulations/PR-results/object_localization_analysis1_precision-recall.txt /home/models/trained_model.pth```
 
 #### Notes for running in SLURM environment
 
@@ -107,3 +107,11 @@ In order to run IceVision on the Duke Compute Cluster (slurm), we built a Singul
 Then you can run scripts on a worker node, for example:
 
 ```singularity exec --nv -B /work selectionscansingularity.sif inference.py simulation_scripts_directory analysis_sub_directory```
+
+## Deployed model
+
+The pretrained "high resolution" baseline model used for most analyses in this project can be found [here](https://huggingface.co/spaces/imanhamid/ObjectDetection_AdmixtureSelection_Space). Users can [download/load the model weights](https://huggingface.co/spaces/imanhamid/ObjectDetection_AdmixtureSelection_Space/blob/main/object_localization_full-ancestry.model.pth) for their own testing purposes.
+
+The model is also deployed as an app the [Hugging Face space](https://huggingface.co/spaces/imanhamid/ObjectDetection_AdmixtureSelection_Space). Users can upload their own 200x200 black and white images of ancestry-painted chromosomes, and the model will return inferred bounding box vertices and scores. We strongly encourage users to follow the example code in [admixture_makeimage.R](./admixture_makeimage.R) to ensure that the image is in the correct expected format (including size and color values) for this model.
+
+The model is trained to detect 11-pixel bboxes (exclusive. e.g. [start pixel, end pixel)) with the adaptive variant at the 6th pixel position. So, for a predicted bbox of [xmin: 111, ymin: 0, xmax:122, ymax:200], the adaptive variant is predicted to be at the scaled position of 116. The x-axis positions are scaled values, so they would need to be reconverted back to physical or genetic map distances. That is, a scaled value of 116 on a 50 Mb chromosome would correspond to ```(116 / 200) * 50000000 = 29,000,000 bp```.
