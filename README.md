@@ -1,5 +1,8 @@
 # Example scripts for object detection-based selection scans using images of ancestry patterns
 
+## Citation
+[[ADD BIORXIV LINK]]
+
 ## Software versions used in this project
 [SLiM](https://messerlab.org/slim/) - v3.4
 
