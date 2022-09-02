@@ -77,10 +77,10 @@ C. [localancestry_alltracts.py](./localancestry_alltracts.py) - script to create
 D. [admixture_ancestrytracts_jobarray.sh](./admixture_ancestrytracts_jobarray.sh) - example job array to generate bed-like ancestry tract files for 1000 SLiM simulations with the [localancestry_alltracts.py](./localancestry_alltracts.py) script.
 
 E. [admixture_makeimage.R](./admixture_makeimage.R) - script to generate b&w ancestry images. Assumes two-way admixture. Height is hard-coded to 200 pixels. Chromosome length and image width must be specified at command line. e.g. `admixture_makeimage.R filename_alltracts.txt 50000000 400` would create a 200x400 image, assuming a chromosome length of 50 Mb and `admixture_makeimage.R filename_alltracts.txt 295 200` would create a 200x200 image, assuming a chromosome with max genetic map length of 295 cM. Excpects bed-like file of ancestry tracts (exclusive. e.g. intervals are \[start, end)) with at least the following columns (any order, labeled):
-   * *start_bp* - first position of ancestry tract (0-based, can be physical or genetic map positions, correct corresponding chromosome length must be specified at command line)
-   * *end_bp* - last position of ancestry tract (exclusive)
-   * *ancID* - ancestry label for that tract (expects 0 or 1)
-   * *childID* - unique haplotype ID (e.g. for a diploid indiviudal "SUBJ-A" you would have tracts mapping to SUBJ-A_Hap1 and SUBJ-A_Hap2)
+   * ```start_bp``` - first position of ancestry tract (0-based, can be physical or genetic map positions, correct corresponding chromosome length must be specified at command line)
+   * ```end_bp``` - last position of ancestry tract (exclusive)
+   * ```ancID``` - ancestry label for that tract (expects 0 or 1)
+   * ```childID``` - unique haplotype ID (e.g. for a diploid indiviudal "SUBJ-A" you would have tracts mapping to SUBJ-A_Hap1 and SUBJ-A_Hap2)
 
 F. [admixture_makeimages_jobarray.sh](./admixture_makeimages_jobarray.sh) - example job array to generate images for 1000 simulations with [admixture_makeimage.R](./admixture_makeimage.R) script
 
