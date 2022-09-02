@@ -7,14 +7,17 @@ from sklearn.metrics import precision_score, recall_score
 import sys
 
 base_directory = sys.argv[1]
-model_directory = sys.argv[2]
+out_directory = sys.argv[2]
+#model_directory = sys.argv[2]
 
 #set directories
-root_dir = "/work/ih49/simulations/"
-base_dir = root_dir + base_directory + "/"
+#root_dir = "/work/ih49/simulations/"
+#base_dir = root_dir + base_directory + "/"
 
 #testing run on full ancestry images
-path = Path(base_dir + model_directory + '/')
+#path = Path(base_dir + model_directory + '/')
+
+path = Path(base_directory + '/')
 
 fnames = get_image_files(path)
 
@@ -103,4 +106,4 @@ thresholds = np.linspace(0,1,10000)
 
 precision_recall_curve = [precision_recall_metric(samples, preds, threshold) for threshold in thresholds]
 
-pd.DataFrame(precision_recall_curve).to_csv(f"/work/ih49/object_localization_{base_directory}_{model_directory}_precision-recall.txt", sep='\t', header=True, index=False)
+pd.DataFrame(precision_recall_curve).to_csv(f"out_directory/object_localization_{base_directory}_{model_directory}_precision-recall.txt", sep='\t', header=True, index=False)
