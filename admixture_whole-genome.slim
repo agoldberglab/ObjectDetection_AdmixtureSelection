@@ -3,7 +3,7 @@
 initialize() {
 	initializeTreeSeq();
 	initializeMutationRate(0);
-	//mean and alpha shape parameters of gamma distributed fitness effects
+	//selection strength drawn from uniform distribution
 	initializeMutationType("m1", 0.5, "f", runif(1,0,0.5));
 	initializeGenomicElementType("g1", m1, 1.0);
 	initializeGenomicElement(g1, 0, 250000000); //chromosome size
