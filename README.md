@@ -11,6 +11,7 @@ Python libraries:
 * [IceVision](https://airctic.com/0.5.2/) - v0.5.2
 * [tskit](https://tskit.dev/tskit/docs/stable/introduction.html) - v0.2.3 (included in [msprime](https://tskit.dev/msprime/docs/stable/intro.html) v0.7.4)
 * [pyslim](https://tskit.dev/pyslim/docs/latest/introduction.html) - v0.401
+* [sklearn](https://scikit-learn.org/stable/) - v0.23.2
 
 R packages:
 * [tidyverse](https://www.tidyverse.org/) - v1.3.0
@@ -95,7 +96,7 @@ Misc scripts:
 
 Example code and notes for training and inference can be found in [objectdetection_ancestryimages_example.ipynb](./objectdetection_ancestryimages_example.ipynb)
 
-* [inference.py](./inference.py) - skip training & get precision & recall values across varying threshholds for a set of images, using a pre-trained model
+* [inference.py](./inference.py) - skip training & get precision & recall values across varying threshholds for a set of images, using a pre-trained model. Not tested outside our specific analyses and directory structure, some hard-coded values may need to be edited. Expects users to provide full paths for a base_directory which contained the images to infer from, an out_directory/filename to output the final table of P-R values for each threshhold, and the pretrained model.  e.g. ```inference.py /home/simulations/analysis1_images /home/simulations/PR-results/object_localization_analysis1_precision-recall.txt /home/models/trained_model.pth```
 
 #### Notes for running in SLURM environment
 
