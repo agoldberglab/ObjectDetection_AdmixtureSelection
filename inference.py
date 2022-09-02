@@ -8,6 +8,7 @@ import sys
 
 base_directory = sys.argv[1]
 out_directory = sys.argv[2]
+pretrained_model = sys.argv[3]
 #model_directory = sys.argv[2]
 
 #set directories
@@ -97,7 +98,7 @@ def precision_recall_metric(samples, preds, detection_threshold=0.5):
     return return_dict
 
 model = faster_rcnn.model(backbone=backbone, num_classes=len(class_map))
-model.load_state_dict(torch.load('/work/ih49/object_localization_full-ancestry.model.pth', map_location=torch.device('cuda')))
+model.load_state_dict(torch.load(pretrained_model, map_location=torch.device('cuda')))
 
 infer_dl = faster_rcnn.infer_dl(valid_ds, batch_size=16)
 samples, preds = faster_rcnn.predict_dl(model.cuda(), infer_dl, detection_threshold=0)
