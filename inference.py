@@ -7,7 +7,7 @@ from sklearn.metrics import precision_score, recall_score
 import sys
 
 base_directory = sys.argv[1]
-out_directory = sys.argv[2]
+outfile = sys.argv[2]
 pretrained_model = sys.argv[3]
 #model_directory = sys.argv[2]
 
@@ -107,4 +107,4 @@ thresholds = np.linspace(0,1,10000)
 
 precision_recall_curve = [precision_recall_metric(samples, preds, threshold) for threshold in thresholds]
 
-pd.DataFrame(precision_recall_curve).to_csv(f"out_directory/object_localization_{base_directory}_{model_directory}_precision-recall.txt", sep='\t', header=True, index=False)
+pd.DataFrame(precision_recall_curve).to_csv(outfile, sep='\t', header=True, index=False)
