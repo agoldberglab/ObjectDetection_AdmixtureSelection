@@ -2,7 +2,9 @@
 
 ## Software versions used in this project
 [SLiM](https://messerlab.org/slim/) - v3.4
+
 [R](https://cran.r-project.org/) - v4.0.0
+
 [Python](https://www.python.org/) - v3.7.4
 
 Python libraries:
