@@ -1,7 +1,7 @@
 # Example scripts for object detection-based selection scans using images of ancestry patterns
 
 ## Citation
-[[ADD BIORXIV LINK]]
+Hamid, I., Korunes, K. L., Schrider, D., & Goldberg, A. (2022). Localizing post-admixture adaptive variants with object detection on ancestry-painted chromosomes. BioRxiv, 2022.09.04.506532. https://doi.org/10.1101/2022.09.04.506532
 
 ## Contents
 1. Deployed model
