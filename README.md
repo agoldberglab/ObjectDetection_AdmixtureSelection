@@ -31,7 +31,7 @@ In order to run IceVision on the Duke Compute Cluster (slurm), we built a Singul
 
 Then you can run scripts on a worker node, for example:
 
-```singularity exec --nv -B /work selectionscansingularity.sif inference.py simulation_scripts_directory analysis_sub_directory```
+```singularity exec --nv -B /work selectionscansingularity.sif inference.py simulation_directory out.txt model.pth```
 
 ## SLiMulations & generating images:
 
